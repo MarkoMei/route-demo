@@ -1,0 +1,54 @@
+/* Reset first all preset alignment values for easier control */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#map {
+    width: 100%;
+    height: 500px;
+    background-color: #555;
+}
+
+#commandbuttons {
+    margin: 20px;
+}
+
+.cmdbutton {
+    margin: 0px 15px;
+    padding: 5px;
+}
+
+body {
+    text-align: center;
+    line-height: 1.5em;
+    background-color: bisque;
+    font-family: sans-serif;
+}
+
+b {font-size: 110%;}
+
+#savedroutes {
+    margin: auto;
+    width: 300px;
+    border-style: solid;
+}
+
+.savedroutelistitem {
+    color: blue;
+}
+
+#footer {
+    font-size: 75%;
+    width: 100%;
+    background-color: #222;
+    color: #FFF;
+    text-align: center;
+    padding: 4px 0;
+}
+
+#footer a{
+    color: #ff6a00;
+}
+

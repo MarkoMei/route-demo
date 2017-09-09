@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Route demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/routedemo.css" type="text/css" />
+    <link rel="icon" type="image/png" href="images/needleleftyellow2.png">
+</head>
+<body>
+    <main>
+        <div id="map"></div>
+        <div id="commandbuttons">
+            <button class="cmdbutton" id="clearroute">Clear Route</button>
+            <button class="cmdbutton" id="saveroute">Save Route</button>
+            <button class="cmdbutton" id="showheatmap">Show Heat Map</button>
+        </div>
+        <hr />
+        <div id="savedroutes">
+            <h4 id="savedroutetitle">Saved routes</h4>
+            <ul id=savedrouteslist></ul>
+        </div>
+
+    </main>
+    <footer id="footer">2017 Marko Meinander</footer>
+
+    <script async src="js/routedemo.js"></script>
+    <script>
+        function loadMapScript() {
+            var searchParams = new URLSearchParams(window.location.search);
+            window.mykey = searchParams.get('key');
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = "https://maps.googleapis.com/maps/api/js?v=3&callback=initMap&key=" + window.mykey;
+            document.body.appendChild(script);
+        }        
+    </script>
+</body>
+</html>
