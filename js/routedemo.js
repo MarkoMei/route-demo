@@ -1,5 +1,5 @@
 /*
-	scripts.js
+	routedemo.js
 */
 
 // don't allow sloppy JavaScript!
