@@ -13,7 +13,7 @@
         <div id="commandbuttons">
             <button class="cmdbutton" id="clearroute">Clear Route</button>
             <button class="cmdbutton" id="saveroute">Save Route</button>
-            <button class="cmdbutton" id="showheatmap">Show Heat Map</button>
+            <button class="cmdbutton" id="showheatmap">Toggle Heat Map</button>
         </div>
         <hr />
         <div id="savedroutes">
@@ -31,7 +31,7 @@
             window.mykey = searchParams.get('key');
             var script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src = "https://maps.googleapis.com/maps/api/js?v=3&callback=initMap&key=" + window.mykey;
+            script.src = "https://maps.googleapis.com/maps/api/js?v=3" + 			"&callback=initMap&libraries=visualization&key=" + window.mykey;
             document.body.appendChild(script);
         }        
     </script>

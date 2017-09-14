@@ -5,7 +5,7 @@
 // don't allow sloppy JavaScript!
 "use strict";
 
-var map=null;
+var map, heatmap;
 var maxPointsInRoute = 10;
 var maxRoutesToSave = 10;
 var kamppi = { lat: 60.1675, lng: 24.9311 };
@@ -23,6 +23,8 @@ function initMap() {
         disableDefaultUI: true
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    heatmap = new google.maps.visualization.HeatmapLayer();
 
     var clickListener = map.addListener('click', function (e) {
         if (currentRoute.length < maxPointsInRoute) {
@@ -73,8 +75,7 @@ function saveRoute(route) {
         if (route.length > 0) {
             var coordinates = [];
             for (var i = 0; i < route.length; i++) {
-                var latlngJson = route[i].position.toJSON();
-                coordinates.push(latlngJson);
+                coordinates.push(route[i].position);
             }
             var routeName = 'Route ' + (savedRoutes.length+1);
             var routeToSave = { routename: routeName, coordinates: coordinates};
@@ -95,6 +96,21 @@ function saveRoute(route) {
     return false;
 }
 
+function toggleHeatmap() {
+    heatmap.setMap(heatmap.getMap() ? null : map);
+}
+
+function getAllRoutePoints() {
+    var points = [];
+    savedRoutes.forEach(function(route) {
+        route.coordinates.forEach(function(coordinate) {
+            points.push(new google.maps.LatLng(coordinate.lat(), coordinate.lng()));
+        });
+    });
+    return points;
+}
+
+
 // function that is called when document html is loaded
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -102,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     var clearRouteButton = document.getElementById('clearroute');
     var saveRouteButton = document.getElementById('saveroute');
+    var showHeatmapButton = document.getElementById('showheatmap');
     
     clearRouteButton.addEventListener('click', function() {
         clearRoute(currentRoute);
@@ -112,7 +129,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (saveRoute(currentRoute)) {
             clearRoute(currentRoute);
             clearCurrentPolyline();
+            heatmap.setData(getAllRoutePoints());
         }
+    });
+    
+    showHeatmapButton.addEventListener('click', function() {
+        toggleHeatmap();
     });
 });
 
