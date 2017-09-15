@@ -18,7 +18,11 @@ function initMap() {
    
     var mapOptions = {
         zoom: 14,
+        minZoom: 14,
+        maxZoom: 14,
         center: kamppi,
+        draggable: false,
+        gestureHandling: 'none',
         mapTypeId: 'roadmap',
         disableDefaultUI: true
     };
