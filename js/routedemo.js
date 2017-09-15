@@ -69,6 +69,19 @@ function clearCurrentPolyline() {
     }
 }
 
+function addRouteToList(routeName) {
+    var list = document.getElementById('savedrouteslist');
+    var newItem = document.createElement('LI');
+    newItem.innerText = routeName;
+    newItem.className = 'savedroutelistitem';
+    list.appendChild(newItem);
+}
+
+function showSavedRoutes() {
+    var savedRoutes = document.getElementById('savedroutes');
+    savedRoutes.style.display = 'block';
+}
+
 function saveRoute(route) {
     if (savedRoutes.length < maxRoutesToSave) {
         // allow saving also a route with only 1 point
@@ -82,11 +95,8 @@ function saveRoute(route) {
             savedRoutes.push(routeToSave);
             //alert(JSON.stringify(routeToSave));
             // add item to 'Saved routes' list
-            var list = document.getElementById('savedrouteslist');
-            var newItem = document.createElement('LI');
-            newItem.innerText = routeName;
-            newItem.className = 'savedroutelistitem';
-            list.appendChild(newItem);
+            addRouteToList(routeName);
+            showSavedRoutes();
             return true;
         }
     }

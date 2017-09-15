@@ -31,12 +31,17 @@ b {font-size: 110%;}
 
 #savedroutes {
     margin: auto;
-    width: 300px;
+    width: 200px;
+}
+
+#savedrouteslist {
     border-style: solid;
 }
 
 .savedroutelistitem {
     color: blue;
+    padding: 2px;
+    list-style-type: none;
 }
 
 #footer {
@@ -45,6 +50,7 @@ b {font-size: 110%;}
     background-color: #222;
     color: #FFF;
     text-align: center;
+    margin-top: 10px;
     padding: 4px 0;
 }
 
