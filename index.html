@@ -15,11 +15,14 @@
             <button class="cmdbutton" id="saveroute">Save Route</button>
             <button class="cmdbutton" id="showheatmap">Toggle Heat Map</button>
         </div>
-        <div id="savedroutes" hidden>
-            <h4 id="savedroutetitle">Saved routes</h4>
-            <ul id=savedrouteslist></ul>
+        <div id="savedroutes" class="flex-container" hidden>
+            <div class="flex-item">
+                <ul id=savedrouteslist>Saved Routes</ul>
+            </div>
+            <div class="flex-item">
+                <button class="cmdbutton" id="exportroutes">Export All Routes</button>
+            </div>
         </div>
-
     </main>
     <footer id="footer">2017 Marko Meinander</footer>
 

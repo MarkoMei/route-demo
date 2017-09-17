@@ -83,7 +83,7 @@ function addRouteToList(routeName) {
 
 function showSavedRoutes() {
     var savedRoutes = document.getElementById('savedroutes');
-    savedRoutes.style.display = 'block';
+    savedRoutes.style.display = 'flex';
 }
 
 function saveRoute(route) {
