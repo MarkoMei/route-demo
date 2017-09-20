@@ -124,6 +124,20 @@ function getAllRoutePoints() {
     return points;
 }
 
+function exportRoutes() {
+    // make JSON using 2 spaces intendation
+    var content = JSON.stringify(savedRoutes, null, 2);
+    var contentType = 'application/json';
+    var filename = new Date().toISOString().slice(0, 19).replace(/:/g, '_') + ' routes.json';
+
+    var a = document.createElement('a');
+    var blob = new Blob([content], {'type': contentType});
+    a.href = window.URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
 
 // function that is called when document html is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -133,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var clearRouteButton = document.getElementById('clearroute');
     var saveRouteButton = document.getElementById('saveroute');
     var showHeatmapButton = document.getElementById('showheatmap');
+    var exportRoutesButton = document.getElementById('exportroutes');
     
     clearRouteButton.addEventListener('click', function() {
         clearRoute(currentRoute);
@@ -150,5 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showHeatmapButton.addEventListener('click', function() {
         toggleHeatmap();
     });
+    
+    exportRoutesButton.addEventListener('click', exportRoutes);
 });
 
