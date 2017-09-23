@@ -28,12 +28,14 @@
 
     <script async src="js/routedemo.js"></script>
     <script>
+        // Take Google Maps API key from query parameters and load the map
         function loadMapScript() {
             var searchParams = new URLSearchParams(window.location.search);
             window.mykey = searchParams.get('key');
             var script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src = "https://maps.googleapis.com/maps/api/js?v=3" + 			"&callback=initMap&libraries=visualization&key=" + window.mykey;
+            script.src = "https://maps.googleapis.com/maps/api/js?v=3" +
+                "&callback=initMap&libraries=visualization&key=" + window.mykey;
             document.body.appendChild(script);
         }        
     </script>

@@ -13,7 +13,8 @@ var currentRoute=[];
 var currentPolyline=null;
 var savedRoutes=[];
 
-
+// initialize the map and heatmap and define the function that is called 
+// when the map is clicked
 function initMap() {
    
     var mapOptions = {
@@ -32,13 +33,14 @@ function initMap() {
 
     var clickListener = map.addListener('click', function (e) {
         if (currentRoute.length < maxPointsInRoute) {
+            // add a new point in the current route
             var marker = new google.maps.Marker({
                 position: e.latLng,
                 map: map
             });
             currentRoute.push(marker);
             
-            // add a new point also in polyLine
+            // add the new point also in polyLine
             if (currentPolyline == null)
             {
                 currentPolyline = makePolyline();
@@ -48,6 +50,7 @@ function initMap() {
     });
 }
 
+// make a polyline object and add it to the current map
 function makePolyline() {
     var polyline = new google.maps.Polyline({
           strokeColor: '#000000',
@@ -58,6 +61,7 @@ function makePolyline() {
     return polyline;
 }
 
+// clear the given route from the map
 function clearRoute(route) {
     while(route.length) {
         // take marker from array one by one (reducing its size)
@@ -66,6 +70,7 @@ function clearRoute(route) {
     }
 }
 
+// hide and then clear the current polyline
 function clearCurrentPolyline() {
     if (currentPolyline != null) {
         currentPolyline.setMap(null);
@@ -73,6 +78,7 @@ function clearCurrentPolyline() {
     }
 }
 
+// append newest route to the saved routes' list
 function addRouteToList(routeName) {
     var list = document.getElementById('savedrouteslist');
     var newItem = document.createElement('LI');
@@ -81,6 +87,7 @@ function addRouteToList(routeName) {
     list.appendChild(newItem);
 }
 
+// make controls inside 'savedroutes' div visible
 function showSavedRoutes() {
     var savedRoutes = document.getElementById('savedroutes');
     savedRoutes.style.display = 'flex';
@@ -97,7 +104,6 @@ function saveRoute(route) {
             var routeName = 'Route ' + (savedRoutes.length+1);
             var routeToSave = { routename: routeName, coordinates: coordinates};
             savedRoutes.push(routeToSave);
-            //alert(JSON.stringify(routeToSave));
             // add item to 'Saved routes' list
             addRouteToList(routeName);
             showSavedRoutes();
@@ -110,10 +116,12 @@ function saveRoute(route) {
     return false;
 }
 
+// toggle heatmap visibility
 function toggleHeatmap() {
     heatmap.setMap(heatmap.getMap() ? null : map);
 }
 
+// returns all route poits as google.maps.LatLng objects
 function getAllRoutePoints() {
     var points = [];
     savedRoutes.forEach(function(route) {
@@ -124,6 +132,7 @@ function getAllRoutePoints() {
     return points;
 }
 
+// export all saved routes
 function exportRoutes() {
     // make JSON using 2 spaces intendation
     var content = JSON.stringify(savedRoutes, null, 2);
@@ -162,9 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    showHeatmapButton.addEventListener('click', function() {
-        toggleHeatmap();
-    });
+    showHeatmapButton.addEventListener('click', toggleHeatmap);
     
     exportRoutesButton.addEventListener('click', exportRoutes);
 });
