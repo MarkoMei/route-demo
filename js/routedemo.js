@@ -32,6 +32,10 @@ function initMap() {
     heatmap = new google.maps.visualization.HeatmapLayer();
 
     var clickListener = map.addListener('click', function (e) {
+        if (savedRoutes.length >= maxRoutesToSave) {
+            // warn the user as there already is the max number of routes saved
+            showAlert('Max ' + maxRoutesToSave + ' routes can be saved!');
+        }
         if (currentRoute.length < maxPointsInRoute) {
             // add a new point in the current route
             var marker = new google.maps.Marker({
@@ -113,9 +117,6 @@ function saveRoute(route) {
             showSavedRoutes();
             return true;
         }
-    }
-    else {
-        showAlert('Max ' + maxRoutesToSave + ' routes can be saved!');
     }
     return false;
 }
