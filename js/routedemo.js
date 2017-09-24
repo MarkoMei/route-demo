@@ -47,6 +47,9 @@ function initMap() {
             }
             currentPolyline.getPath().push(e.latLng);
         }
+        else {
+            showAlert('Max ' + maxPointsInRoute + ' points in route!');
+        }
     });
 }
 
@@ -68,6 +71,7 @@ function clearRoute(route) {
         // and set them invisible
         route.pop().setMap(null);
     }
+    hideAlert();
 }
 
 // hide and then clear the current polyline
@@ -111,7 +115,7 @@ function saveRoute(route) {
         }
     }
     else {
-        console.log('Sorry, out of space!')
+        showAlert('Max ' + maxRoutesToSave + ' routes can be saved!');
     }
     return false;
 }
@@ -146,6 +150,18 @@ function exportRoutes() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+}
+
+
+function showAlert(alertText) {
+    var alertDiv = document.getElementById('alert');
+    alertDiv.innerHTML = alertText;
+    alertDiv.style.display = 'inline-block';
+}
+
+function hideAlert() {
+    var alertDiv = document.getElementById('alert');
+    alertDiv.style.display = 'none';
 }
 
 // function that is called when document html is loaded
